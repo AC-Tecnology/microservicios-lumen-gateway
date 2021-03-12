@@ -33,6 +33,7 @@ class BookController extends Controller
     public function __construct(BookService $bookService, AuthorService $authorService)
     {
         $this->bookService = $bookService;
+        $this->authorService = $authorService;
     }
 
 
@@ -53,6 +54,10 @@ class BookController extends Controller
      */
     public function store(Request $request)
     {
+        //verifica si existe un author en el service de author para crear un libro
+        $ban = json_decode($this->authorService->obtainAuthor($request->author_id));
+        //dd($ban->data->name);
+
         $responseCreateBooks = $this->bookService->createBook($request->all());
         return $this->successResponse($responseCreateBooks, Response::HTTP_CREATED);
     }
