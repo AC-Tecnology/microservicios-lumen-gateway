@@ -31,6 +31,7 @@ $app->withEloquent();
  * Registering config files
  */
 $app->configure('services');
+$app->configure('auth');
 
 /*
 |--------------------------------------------------------------------------
@@ -82,7 +83,8 @@ $app->configure('app');
 // ]);
 
 $app->routeMiddleware([
-    'auth' => App\Http\Middleware\Authenticate::class,
+    //'auth' => App\Http\Middleware\Authenticate::class,
+    'client.credentials' => Laravel\Passport\Http\Middleware\CheckClientCredentials::class,
 ]);
 
 /*
