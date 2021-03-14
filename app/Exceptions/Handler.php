@@ -11,6 +11,7 @@ use Throwable;
 use App\Traits\ApiResponser;
 use Illuminate\Http\Response;
 use GuzzleHttp\Exception\ClientException;
+use Illuminate\Auth\AuthenticationException;
 
 class Handler extends ExceptionHandler
 {
