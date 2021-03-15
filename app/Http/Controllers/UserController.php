@@ -60,7 +60,7 @@ class UserController extends Controller
         $user = User::create($fields);
 
         //HTTP_CREATED es una constante que devuelve 201 de creado en http
-        return $this->successResponse($user, Response::HTTP_CREATED);
+        return $this->validResponse($user, Response::HTTP_CREATED);
     }
 
     /**
@@ -72,7 +72,7 @@ class UserController extends Controller
     {
         $user = User::findOrFail($id);
 
-        return $this->successResponse($user);
+        return $this->validResponse($user);
     }
 
     /**
@@ -107,7 +107,7 @@ class UserController extends Controller
 
         $user->save();
 
-        return $this->successResponse($user);
+        return $this->validResponse($user);
 
     }
 
@@ -122,6 +122,16 @@ class UserController extends Controller
 
         $user->delete();
         
-        return $this->successResponse($user);
+        return $this->validResponse($user);
+    }
+
+    /**
+     * Identifies the curren user
+     * @return Illuminate\Http\Response
+     */
+
+    public function me(Request $request)
+    {
+        return $this->validResponse($request->user());
     }
 }
